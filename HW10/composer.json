@@ -1,0 +1,13 @@
+{
+    "name": "lenas/hw10",
+    "version": "1.0",
+    "require": {
+        "twig/twig": "^3.0",
+        "symfony/console": "^5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Documentor\\": "src"
+        }
+    }
+}

@@ -1,0 +1,19 @@
+{% extends 'layouts/site_layout.html.twig' %}
+
+{% block title %}Hello PageController!{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        body {
+            background-color: lightgray;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mt-5">About</h1>
+        <p>{{ page_name }}</p>
+    </div>
+{% endblock %}

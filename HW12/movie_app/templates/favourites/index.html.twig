@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SearchController!{% endblock %}
+
+{% block body %}
+    <h1 class="title">FAVOURITES</h1>
+
+    {% if result|length == 0 %}
+        <h1 class="info">Your favourites list is empty now! Please, add some movies!</h1>
+    {% else %}
+        <div class="row">
+            {% for movie in result %}
+                <div class="col-lg-4">
+                    <div class="single_movie">
+                        <a href="https://www.imdb.com/title/{{ movie.imdbId }}" target="_blank" style=" ">
+                            <img src="{{ movie.poster }}"/>
+                            <p>{{ movie.title }}</p>
+                            <p>{{ movie.year }}</p>
+                            <p>{{ movie.type }}</p>
+                        </a>
+                        <form action="./favourites" method="POST" >
+                            <input class="hidden_input" type="text" name="film_id" value="{{ movie.imdbId }}">
+                            <input class="hidden_input" type="text" name="action_type" value="remove">
+                            <button type="submit" class="btn btn-danger">Remove from favourites</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

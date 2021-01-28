@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SearchController!{% endblock %}
+
+{% block body %}
+    <h1 class="title">Search page</h1>
+    <div>
+        <form class="search_form" action="./search" method="POST">
+            <input class="form-control input" type="text" name="movieTitle">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+    {% if result|length == 0 %}
+        <h1 class="info">Your search line is empty! Please, type a movie title to start searching...</h1>
+    {% else %}
+
+    <div class="row">
+        {% for movie in result %}
+            <div class="col-lg-4">
+                <div class="single_movie">
+                    <a href="https://www.imdb.com/title/{{ movie.imdbId }}" target="_blank" style=" ">
+                        <img src="{{ movie.poster }}"/>
+                        <p>{{ movie.title }}</p>
+                        <p>{{ movie.year }}</p>
+                        <p>{{ movie.type }}</p>
+                    </a>
+                    <div class="buttons_wrap">
+                        <form action="./favourites" method="POST">
+                            <input class="hidden_input" type="text" name="film_id" value="{{ movie.imdbId }}">
+                            <input class="hidden_input" type="text" name="action_type" value="add">
+                            <button type="submit" class="btn btn-success">Add to Favourites</button>
+                        </form>
+                        <form action="./catalog" method="POST">
+                            <input class="hidden_input" type="text" name="film_id" value="{{ movie.imdbId }}">
+                            <input class="hidden_input" type="text" name="action_type" value="add">
+                            <button type="submit" class="btn btn-warning">Add to Catalog</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endblock %}
